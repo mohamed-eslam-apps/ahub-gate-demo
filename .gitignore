@@ -3,3 +3,6 @@ node_modules/
 .deploy/
 test-results/
 playwright-report/
+walkthrough/.users.local.json
+walkthrough/.auth/
+walkthrough/videos/

@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # Simulates the Jenkins promotion step: ask the gate, deploy to prod, confirm.
-# Usage: scripts/release.sh [commit] [--no-confirm] [--skip-gate]
+# Usage: scripts/release.sh [commit] [--check-only] [--no-confirm] [--skip-gate]
 #                           [--break-glass "<reason>" [--cause ahUnreachable|versionUnresolvable]]
 . "$(dirname "$0")/lib.sh"
 load_env
 
-commit=HEAD confirm=1 skip_gate=0 break_glass="" cause=ahUnreachable
+commit=HEAD confirm=1 skip_gate=0 check_only=0 break_glass="" cause=ahUnreachable
 while [ $# -gt 0 ]; do
   case $1 in
+    --check-only) check_only=1 ;;
     --no-confirm) confirm=0 ;;
     --skip-gate) skip_gate=1 ;;
     --break-glass) break_glass=${2:?reason required}; shift ;;
@@ -42,6 +43,7 @@ else
     echo "Gate blocked ${sha:0:7} ($verdict). Not deploying." >&2
     exit 1
   fi
+  if [ "$check_only" = 1 ]; then echo "Gate allows ${sha:0:7} ($verdict). --check-only: not deploying."; exit 0; fi
 fi
 
 "$(dirname "$0")/deploy.sh" prod "$sha"
