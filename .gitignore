@@ -6,3 +6,4 @@ playwright-report/
 walkthrough/.users.local.json
 walkthrough/.auth/
 walkthrough/videos/
+walkthrough/.state.json
