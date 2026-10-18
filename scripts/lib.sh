@@ -51,4 +51,4 @@ api() {
   rm -f "$out"
 }
 
-resolve_sha() { git rev-parse "${1:-HEAD}^{commit}"; }
+resolve_sha() { git rev-parse --verify -q "${1:-HEAD}^{commit}"; }
