@@ -17,8 +17,15 @@ pages_base() {
 
 load_env() {
   [ -f .env.local ] || { echo "Missing .env.local (copy .env.local.example)" >&2; exit 2; }
-  # shellcheck disable=SC1091
-  set -a; . ./.env.local; set +a
+  # Parse KEY=VALUE lines instead of sourcing, so an unquoted value with a
+  # space (AHUB_PRODUCT=Gate Demo) works and nothing in the file is executed.
+  local key value
+  while IFS='=' read -r key value || [ -n "$key" ]; do
+    [[ $key =~ ^[A-Z_][A-Z0-9_]*$ ]] || continue
+    value=${value%$'\r'}
+    value=${value#\"}; value=${value%\"}
+    export "$key=$value"
+  done < .env.local
   : "${AHUB_URL:?set AHUB_URL in .env.local}"
   : "${AHUB_TOKEN:?set AHUB_TOKEN in .env.local}"
   AHUB_PRODUCT=${AHUB_PRODUCT:-Gate Demo}
