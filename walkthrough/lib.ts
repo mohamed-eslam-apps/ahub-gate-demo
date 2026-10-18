@@ -96,6 +96,7 @@ export class Scenario {
     });
     await this.ctx.addInitScript(OVERLAY);
     this.page = await this.ctx.newPage();
+    (globalThis as any).__lastPage = this.page;
     this.page.on("load", () => void this.repaint());
     await this.goto(path);
     if (this.page.url().includes("/login")) await this.login(role, path);
