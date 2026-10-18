@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gate Demo Store</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1 data-testid="title">Gate Demo Store</h1>
+      <p class="tagline">A tiny app for exercising the Automation Hub release gate.</p>
+
+      <section aria-label="Cart">
+        <p>Items in cart: <output data-testid="count">0</output></p>
+        <button type="button" data-testid="add">Add to cart</button>
+        <button type="button" data-testid="clear">Clear</button>
+      </section>
+
+      <section aria-label="Newsletter">
+        <form data-testid="newsletter" novalidate>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" />
+          <button type="submit">Subscribe</button>
+          <p role="status" data-testid="form-status"></p>
+        </form>
+      </section>
+    </main>
+    <footer>Version: <code data-testid="version">loading…</code></footer>
+    <script src="app.js"></script>
+  </body>
+</html>

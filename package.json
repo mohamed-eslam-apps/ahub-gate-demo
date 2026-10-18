@@ -1,0 +1,12 @@
+{
+  "name": "ahub-gate-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "serve": "python3 -m http.server 4173 --directory app"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
