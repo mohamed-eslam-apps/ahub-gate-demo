@@ -17,6 +17,15 @@
         <button type="button" data-testid="clear">Clear</button>
       </section>
 
+      <section aria-label="Promo code">
+        <form data-testid="promo" novalidate>
+          <label for="promo-code">Promo code</label>
+          <input id="promo-code" name="code" autocomplete="off" />
+          <button type="submit">Apply</button>
+          <p role="status" data-testid="promo-status"></p>
+        </form>
+      </section>
+
       <section aria-label="Newsletter">
         <form data-testid="newsletter" novalidate>
           <label for="email">Email</label>
@@ -26,7 +35,7 @@
         </form>
       </section>
     </main>
-    <footer>Version (v5): <code data-testid="version">loading…</code></footer>
+    <footer>Version (v6): <code data-testid="version">loading…</code></footer>
     <script src="app.js"></script>
   </body>
 </html>
