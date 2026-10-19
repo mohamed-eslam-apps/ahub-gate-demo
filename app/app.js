@@ -19,6 +19,16 @@ form.addEventListener("submit", (e) => {
   status.className = valid ? "ok" : "error";
 });
 
+// Promo codes: one code, 10% off. No automated test covers this yet.
+const promo = document.querySelector('[data-testid="promo"]');
+const promoStatus = document.querySelector('[data-testid="promo-status"]');
+promo.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const valid = promo.code.value.trim().toUpperCase() === "GATE10";
+  promoStatus.textContent = valid ? "10% off applied." : "That code is not valid.";
+  promoStatus.className = valid ? "ok" : "error";
+});
+
 fetch(`version.json?ts=${Date.now()}`)
   .then((r) => r.json())
   .then((v) => {
